@@ -712,12 +712,12 @@
     }
 
     async function saveWish(name, message) {
-      if (BIN_ID === 'ANNELIESE_BIN_ID' || !message.trim()) return;
+      if (!name.trim()) return;
       try {
         const get    = await fetch(BIN_URL + '/latest', { headers: { 'X-Master-Key': API_KEY } });
         const data   = await get.json();
         const wishes = (data.record && data.record.wishes) || [];
-        wishes.push({ name, message, date: new Date().toLocaleDateString('en-US', { month:'short', day:'numeric' }) });
+        wishes.push({ name, message: message || '(no message)', date: new Date().toLocaleDateString('en-US', { month:'short', day:'numeric' }) });
         await fetch(BIN_URL, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
@@ -742,7 +742,7 @@
       ]);
       document.getElementById('form-wrap').style.display = 'none';
       document.getElementById('success-state').style.display = 'block';
-      if (message) setTimeout(loadWishes, 800);
+      setTimeout(loadWishes, 800);
     });
 
     loadWishes();
