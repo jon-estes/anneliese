@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anneliese's 2nd Birthday! 🦈</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%230891b2'/%3E%3Ctext y='22' x='16' text-anchor='middle' font-size='18'%3E🦈%3C/text%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ocean:     #0369a1;
+      --ocean-lt:  #0ea5e9;
+      --ocean-dk:  #0c4a6e;
+      --deep:      #082f49;
+      --teal:      #06b6d4;
+      --teal-lt:   #cffafe;
+      --coral:     #f97316;
+      --coral-lt:  #fff7ed;
+      --sun:       #fbbf24;
+      --sand:      #fef3c7;
+      --white:     #ffffff;
+      --ink:       #0c1a2e;
+      --muted:     #64748b;
+      --border:    rgba(3,105,161,0.15);
+      --bubble:    rgba(255,255,255,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--deep);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── OCEAN BACKGROUND ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 800px 600px at 20% 0%,   #0ea5e9 0%, transparent 60%),
+        radial-gradient(ellipse 600px 500px at 80% 30%,  #0369a1 0%, transparent 60%),
+        radial-gradient(ellipse 500px 400px at 50% 100%, #082f49 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── BUBBLES LAYER ── */
+    .bubbles-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bubble-el {
+      position: absolute;
+      bottom: -80px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.6), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.3);
+      animation: bubble-rise linear infinite;
+    }
+
+    @keyframes bubble-rise {
+      0%   { transform: translateY(0) translateX(0) scale(1);   opacity: 0; }
+      5%   { opacity: 1; }
+      90%  { opacity: 0.7; }
+      100% { transform: translateY(-110vh) translateX(var(--drift)) scale(var(--pop)); opacity: 0; }
+    }
+
+    /* ── PAGE ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 0 1rem 5rem;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem 0;
+      position: relative;
+    }
+
+    .fish-row {
+      font-size: 1.8rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 0.75rem;
+      animation: swim 4s ease-in-out infinite;
+    }
+
+    @keyframes swim {
+      0%, 100% { transform: translateX(-6px); }
+      50%       { transform: translateX(6px);  }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Bubblegum Sans', cursive;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sun);
+      background: rgba(251,191,36,0.12);
+      border: 1px solid rgba(251,191,36,0.35);
+      padding: 5px 18px;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-family: 'Bubblegum Sans', cursive;
+      font-size: clamp(3rem, 11vw, 5rem);
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+      text-shadow:
+        0 0 40px rgba(14,165,233,0.8),
+        0 4px 0 rgba(3,105,161,0.5);
+      letter-spacing: 0.02em;
+    }
+
+    .hero h1 span {
+      color: var(--sun);
+      text-shadow:
+        0 0 30px rgba(251,191,36,0.9),
+        0 4px 0 rgba(180,120,0,0.4);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .hero-tagline {
+      font-family: 'Bubblegum Sans', cursive;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      color: var(--teal);
+      margin-bottom: 0;
+      text-shadow: 0 0 12px rgba(6,182,212,0.6);
+    }
+
+    /* ── ANIMATED WAVE DIVIDER ── */
+    .wave-wrap {
+      position: relative;
+      margin-top: 1.5rem;
+      line-height: 0;
+      overflow: hidden;
+    }
+
+    .wave-wrap svg {
+      display: block;
+      width: 100%;
+    }
+
+    .wave1 { animation: wave-shift 6s ease-in-out infinite; }
+    .wave2 { animation: wave-shift 8s ease-in-out infinite reverse; opacity: 0.6; }
+
+    @keyframes wave-shift {
+      0%, 100% { transform: translateX(0); }
+      50%       { transform: translateX(-30px); }
+    }
+
+    /* ── DETAILS STRIP ── */
+    .details-strip {
+      background: linear-gradient(180deg, #0369a1, #054e7a);
+      border: 1px solid rgba(14,165,233,0.3);
+      border-top: none;
+      padding: 1.5rem 1.5rem;
+      border-radius: 0 0 1.5rem 1.5rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 8px 32px rgba(3,105,161,0.3);
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+    }
+
+    .detail-item {
+      padding: 0.85rem 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .detail-item + .detail-item {
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .detail-item:nth-child(odd) {
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .detail-item.full-width {
+      grid-column: 1 / -1;
+      border-right: none;
+    }
+
+    .detail-icon { font-size: 17px; flex-shrink: 0; margin-top: 2px; }
+
+    .d-label {
+      font-family: 'Bubblegum Sans', cursive;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sun);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .d-val {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.35;
+    }
+
+    .d-val a { color: var(--teal-lt); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ── RSVP CARD ── */
+    .rsvp-card {
+      background: rgba(255,255,255,0.97);
+      border: 1px solid var(--border);
+      border-radius: 1.75rem;
+      padding: 2rem 1.75rem;
+      box-shadow: 0 8px 48px rgba(3,105,161,0.2), 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .card-title {
+      font-family: 'Bubblegum Sans', cursive;
+      font-size: 1.6rem;
+      color: var(--ocean-dk);
+      margin-bottom: 0.2rem;
+    }
+
+    .card-sub { font-size: 13px; color: var(--muted); margin-bottom: 1.75rem; }
+
+    /* ── FIELDS ── */
+    .field { margin-bottom: 1.1rem; }
+
+    .field label {
+      display: block;
+      font-family: 'Bubblegum Sans', cursive;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ocean);
+      margin-bottom: 6px;
+    }
+
+    .field label .opt {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+      margin-left: 4px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+      background: #f8fbff;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--ocean-lt);
+      box-shadow: 0 0 0 3px rgba(14,165,233,0.15);
+      background: #fff;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder { color: #94a3b8; }
+
+    .field textarea { min-height: 80px; resize: vertical; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* ── ATTEND BUTTONS ── */
+    .attend-group {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .attend-btn {
+      padding: 12px 6px;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      background: #f8fbff;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .attend-btn:hover { border-color: var(--ocean-lt); background: #eff9ff; }
+    .attend-btn .ab-icon { font-size: 22px; }
+    .attend-btn .ab-label { font-family: 'Bubblegum Sans', cursive; font-size: 11px; color: var(--muted); line-height: 1.3; }
+
+    .attend-btn.sel-yes  { border-color: var(--ocean); background: #eff9ff; box-shadow: 0 0 0 3px rgba(14,165,233,0.15); }
+    .attend-btn.sel-yes .ab-label  { color: var(--ocean-dk); }
+    .attend-btn.sel-no   { border-color: var(--coral); background: #fff7f0; box-shadow: 0 0 0 3px rgba(249,115,22,0.12); }
+    .attend-btn.sel-no .ab-label   { color: #c2410c; }
+    .attend-btn.sel-maybe { border-color: var(--sun); background: #fffbeb; box-shadow: 0 0 0 3px rgba(251,191,36,0.15); }
+    .attend-btn.sel-maybe .ab-label { color: #92400e; }
+
+    .hp { display: none; }
+
+    /* ── SUBMIT ── */
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      margin-top: 1.5rem;
+      background: linear-gradient(135deg, var(--ocean-lt), var(--ocean));
+      color: white;
+      font-family: 'Bubblegum Sans', cursive;
+      font-size: 17px;
+      letter-spacing: 0.05em;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.15s;
+      box-shadow: 0 4px 20px rgba(3,105,161,0.35);
+    }
+
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(3,105,161,0.45); }
+    .submit-btn:active { transform: scale(0.98); }
+
+    /* ── SUCCESS ── */
+    .success { display: none; text-align: center; padding: 1rem 0; }
+
+    .success .s-emoji {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 0.75rem;
+      animation: pop 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
+
+    .success h2 {
+      font-family: 'Bubblegum Sans', cursive;
+      font-size: 1.8rem;
+      color: var(--ocean-dk);
+      margin-bottom: 0.5rem;
+    }
+
+    .success p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ── SECTION CARDS ── */
+    .section-card {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 1.75rem;
+      margin-top: 1.25rem;
+      box-shadow: 0 4px 24px rgba(3,105,161,0.1);
+    }
+
+    .section-title {
+      font-family: 'Bubblegum Sans', cursive;
+      font-size: 1.2rem;
+      color: var(--ocean-dk);
+      margin-bottom: 0.2rem;
+    }
+
+    .section-sub { font-size: 13px; color: var(--muted); margin-bottom: 1rem; }
+
+    .tag {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid;
+      margin-bottom: 4px;
+    }
+
+    /* ── WISHES ── */
+    .wish-card {
+      background: #f0f9ff;
+      border: 1px solid rgba(14,165,233,0.2);
+      border-radius: 1rem;
+      padding: 1rem 1.25rem;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .wish-avatar {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bubblegum Sans', cursive;
+      font-size: 14px;
+    }
+
+    .wish-name { font-size: 13px; font-weight: 500; color: var(--ocean-dk); margin-bottom: 3px; }
+    .wish-msg  { font-size: 14px; color: #334155; line-height: 1.55; }
+
+    /* ── FOOTER ── */
+    .footer-note {
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 1.25rem;
+      line-height: 1.7;
+    }
+
+    .footer-note strong { color: rgba(255,255,255,0.8); font-weight: 500; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 420px) {
+      .two-col { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bubbles-layer" id="bubbles-layer"></div>
+
+  <div class="page">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="fish-row">🐠 🐟 🦈 🐟 🐠</div>
+      <div class="hero-badge">🦈 &nbsp; Baby Shark Birthday &nbsp; 🦈</div>
+      <h1>Anneliese<br>turns <span>two!</span></h1>
+      <p class="hero-sub">Doo doo doo doo doo doo — come celebrate! 🎉</p>
+      <p class="hero-tagline">★ &nbsp; CHUCK E. CHEESE PARTY &nbsp; ★</p>
+    </div>
+
+    <!-- ANIMATED WAVE -->
+    <div class="wave-wrap">
+      <svg viewBox="0 0 580 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="70">
+        <path class="wave1" d="M0,35 C80,60 160,10 290,35 C420,60 500,10 580,35 L580,70 L0,70 Z" fill="#0369a1"/>
+        <path class="wave2" d="M0,45 C100,20 200,65 290,45 C380,25 480,65 580,45 L580,70 L0,70 Z" fill="#054e7a" opacity="0.7"/>
+      </svg>
+    </div>
+
+    <!-- DETAILS STRIP -->
+    <div class="details-strip">
+      <div class="details-grid">
+        <div class="detail-item">
+          <span class="detail-icon">📅</span>
+          <div>
+            <span class="d-label">Date</span>
+            <span class="d-val">Sunday, August 2nd</span>
+          </div>
+        </div>
+        <div class="detail-item">
+          <span class="detail-icon">🕛</span>
+          <div>
+            <span class="d-label">Time</span>
+            <span class="d-val">TBD</span>
+          </div>
+        </div>
+        <div class="detail-item">
+          <span class="detail-icon">📍</span>
+          <div>
+            <span class="d-label">Location</span>
+            <span class="d-val">Chuck E. Cheese<br>Roseville, CA</span>
+          </div>
+        </div>
+        <!-- Chuck E. Cheese visual -->
+        <div class="detail-item full-width" style="padding-top:0.5rem;padding-bottom:0.5rem;">
+          <div style="width:100%;background:rgba(0,0,0,0.2);border-radius:10px;padding:0.75rem;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:2.5rem;">🎪</span>
+            <div>
+              <div style="font-family:'Bubblegum Sans',cursive;color:#fbbf24;font-size:14px;letter-spacing:0.05em;">Chuck E. Cheese</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.65);margin-top:2px;">🍕 Pizza · 🎮 Games · 🎂 Birthday parties</div>
+            </div>
+            <div style="margin-left:auto;font-size:1.5rem;">🎉</div>
+          </div>
+        </div>
+        <div class="detail-item">
+          <span class="detail-icon">🦈</span>
+          <div>
+            <span class="d-label">Theme</span>
+            <span class="d-val">Baby Shark!</span>
+          </div>
+        </div>
+        <div class="detail-item full-width">
+          <span class="detail-icon">💬</span>
+          <div>
+            <span class="d-label">Questions?</span>
+            <span class="d-val">Ashley Xiong · <a href="tel:2792260089">279-226-0089</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RSVP CARD -->
+    <div class="rsvp-card">
+      <div id="form-wrap">
+        <h2 class="card-title">🦈 &nbsp; Will you swim on over?</h2>
+        <p class="card-sub">Please RSVP so we can plan the pizza & cake! 🎂</p>
+
+        <form
+          name="anneliese-rsvp"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          id="rsvp-form"
+        >
+          <input type="hidden" name="form-name" value="anneliese-rsvp">
+          <div class="hp"><label>Skip: <input name="bot-field"></label></div>
+
+          <div class="two-col">
+            <div class="field">
+              <label for="parent-name">Your name</label>
+              <input type="text" id="parent-name" name="parent-name" placeholder="Jane Smith" required>
+            </div>
+            <div class="field">
+              <label for="child-name">Child's name <span class="opt">optional</span></label>
+              <input type="text" id="child-name" name="child-name" placeholder="Little one">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone number <span class="opt">optional</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="(916) 555-0100">
+          </div>
+
+          <div class="field">
+            <label>Attending?</label>
+            <div class="attend-group">
+              <button type="button" class="attend-btn" id="btn-yes" onclick="pick('yes')">
+                <span class="ab-icon">🦈</span>
+                <span class="ab-label">We'll be there!</span>
+              </button>
+              <button type="button" class="attend-btn" id="btn-maybe" onclick="pick('maybe')">
+                <span class="ab-icon">🤔</span>
+                <span class="ab-label">Maybe!</span>
+              </button>
+              <button type="button" class="attend-btn" id="btn-no" onclick="pick('no')">
+                <span class="ab-icon">😢</span>
+                <span class="ab-label">Can't make it</span>
+              </button>
+            </div>
+            <input type="hidden" name="attending" id="attending-hidden">
+          </div>
+
+          <div class="two-col">
+            <div class="field">
+              <label for="num-kids">Kids attending <span class="opt">optional</span></label>
+              <select id="num-kids" name="num-kids">
+                <option value="">–</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="num-adults">Adults attending <span class="opt">optional</span></label>
+              <select id="num-adults" name="num-adults">
+                <option value="">–</option>
+                <option>1</option><option>2</option><option>3</option><option>4+</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="allergies">Allergies or dietary needs <span class="opt">optional</span></label>
+            <input type="text" id="allergies" name="allergies" placeholder="None, nut allergy, gluten-free…">
+          </div>
+
+          <div class="field">
+            <label for="message">Birthday wish for Anneliese 🦈 <span class="opt">optional</span></label>
+            <textarea id="message" name="message" placeholder="Write something sweet for the birthday girl!"></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            🦈 &nbsp; Send RSVP &nbsp; 🦈
+          </button>
+        </form>
+      </div>
+
+      <div class="success" id="success-state">
+        <span class="s-emoji">🦈</span>
+        <h2>Baby Shark, doo doo!</h2>
+        <p>Thanks for RSVPing!<br>Anneliese can't wait to celebrate with you. 🎉</p>
+      </div>
+    </div>
+
+    <p class="footer-note">
+      <strong>Gifts are totally optional</strong> — your presence is the present!<br>
+      Chuck E. Cheese · Roseville, CA
+    </p>
+
+    <!-- GIFT IDEAS -->
+    <div class="section-card">
+      <h3 class="section-title">Gift ideas 🎁</h3>
+      <p class="section-sub">Anneliese is really into…</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span class="tag" style="background:#f0fdf4;color:#15803d;border-color:#bbf7d0;">🐸 Hopper</span>
+        <span class="tag" style="background:#eff9ff;color:#0369a1;border-color:#bae6fd;">🦈 Baby Shark</span>
+        <span class="tag" style="background:#f0f9ff;color:#0e7490;border-color:#a5f3fc;">🧜‍♀️ Mermaids</span>
+        <span class="tag" style="background:#fdf2f8;color:#9d174d;border-color:#fbcfe8;">👱‍♀️ Barbies</span>
+        <span class="tag" style="background:#f8faff;color:#3730a3;border-color:#c7d2fe;">🫧 Bubbles</span>
+        <span class="tag" style="background:#fefce8;color:#854d0e;border-color:#fde68a;">🙈 Hide & Seek</span>
+        <span class="tag" style="background:#fff7ed;color:#c2410c;border-color:#fed7aa;">🐶 Dogs</span>
+      </div>
+    </div>
+
+    <!-- BIRTHDAY WISHES -->
+    <div class="section-card">
+      <div style="text-align:center;margin-bottom:1.25rem;">
+        <h3 class="section-title">Birthday wishes 💌</h3>
+        <p class="section-sub" style="margin-bottom:0;">Messages from family & friends for Anneliese</p>
+      </div>
+      <div id="wishes-list" style="display:flex;flex-direction:column;gap:12px;">
+        <div style="text-align:center;padding:2rem;color:var(--muted);font-size:14px;" id="wishes-loading">
+          Loading wishes… 🦈
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ── JSONBin — using same bin structure, separate bin for Anneliese
+    // TODO: create a new JSONBin for Anneliese and replace this ID
+    const BIN_ID  = '6a556404f5f4af5e298ab9a6';
+    const API_KEY = '$2a$10$wgnCzdzVBKPHHeXZBQap.eY0Jfi0CPbck97VI5f.bUefZmNWPm3PK';
+    const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+    function pick(val) {
+      ['yes','maybe','no'].forEach(v => {
+        document.getElementById('btn-' + v).className =
+          'attend-btn' + (v === val ? ' sel-' + v : '');
+      });
+      document.getElementById('attending-hidden').value = val;
+    }
+
+    function escHtml(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function wishCard(w) {
+      const palettes = [
+        ['#eff9ff','#0369a1'],['#fef9c3','#854d0e'],['#f0fdf4','#15803d'],
+        ['#fdf2f8','#9d174d'],['#fff7ed','#c2410c'],['#f5f3ff','#5b21b6'],
+      ];
+      const [bg, fg] = palettes[Math.abs((w.name||'').charCodeAt(0)) % palettes.length];
+      const initials = (w.name||'?').trim().split(' ').map(p=>p[0]).join('').toUpperCase().slice(0,2);
+      return `<div class="wish-card">
+        <div class="wish-avatar" style="background:${bg};color:${fg};">${initials}</div>
+        <div style="flex:1;min-width:0;">
+          <div class="wish-name">${escHtml(w.name)}</div>
+          <div class="wish-msg">${escHtml(w.message)}</div>
+        </div>
+      </div>`;
+    }
+
+    async function loadWishes() {
+      const list    = document.getElementById('wishes-list');
+      const loading = document.getElementById('wishes-loading');
+      if (BIN_ID === 'ANNELIESE_BIN_ID') {
+        loading.textContent = 'Wishes will appear here once guests RSVP! 🦈';
+        return;
+      }
+      try {
+        const res    = await fetch(BIN_URL + '/latest', { headers: { 'X-Master-Key': API_KEY } });
+        const data   = await res.json();
+        const wishes = (data.record && data.record.wishes) || [];
+        if (wishes.length === 0) {
+          loading.textContent = 'No wishes yet — be the first! 🦈';
+        } else {
+          loading.style.display = 'none';
+          list.innerHTML = wishes.slice().reverse().map(wishCard).join('');
+        }
+      } catch(e) {
+        loading.textContent = "Couldn't load wishes right now — check back soon! 💌";
+      }
+    }
+
+    async function saveWish(name, message) {
+      if (BIN_ID === 'ANNELIESE_BIN_ID' || !message.trim()) return;
+      try {
+        const get    = await fetch(BIN_URL + '/latest', { headers: { 'X-Master-Key': API_KEY } });
+        const data   = await get.json();
+        const wishes = (data.record && data.record.wishes) || [];
+        wishes.push({ name, message, date: new Date().toLocaleDateString('en-US', { month:'short', day:'numeric' }) });
+        await fetch(BIN_URL, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+          body: JSON.stringify({ wishes })
+        });
+      } catch(e) {}
+    }
+
+    document.getElementById('rsvp-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const data    = new FormData(e.target);
+      const name    = (data.get('parent-name') || '').trim();
+      const message = (data.get('message') || '').trim();
+      const encoded = new URLSearchParams(data).toString();
+      await Promise.allSettled([
+        fetch(window.location.pathname, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: encoded,
+        }),
+        saveWish(name, message)
+      ]);
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('success-state').style.display = 'block';
+      if (message) setTimeout(loadWishes, 800);
+    });
+
+    loadWishes();
+  </script>
+
+  <script>
+    // ── FLOATING BUBBLES ──
+    (function() {
+      const layer = document.getElementById('bubbles-layer');
+      const sizes = [8, 12, 16, 22, 28, 10, 18, 14, 24, 20];
+      for (let i = 0; i < 22; i++) {
+        const el   = document.createElement('div');
+        el.className = 'bubble-el';
+        const size  = sizes[i % sizes.length];
+        const left  = 2 + Math.random() * 96;
+        const dur   = 10 + Math.random() * 18;
+        const delay = -(Math.random() * dur);
+        const drift = (Math.random() - 0.5) * 60 + 'px';
+        const pop   = 0.8 + Math.random() * 0.4;
+        el.style.cssText = `width:${size}px;height:${size}px;left:${left}%;--drift:${drift};--pop:${pop};animation-duration:${dur}s;animation-delay:${delay}s;`;
+        layer.appendChild(el);
+      }
+    })();
+  </script>
+
+</body>
+</html>
